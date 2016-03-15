@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
     <name>com_hqcblistmailer</name>
-    <creationDate>2014-01-28</creationDate>
-    <copyright>Copyright (C) 2014. All rights reserved.</copyright>
-    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <creationDate>2016-03-15</creationDate>
+    <copyright>Copyright (C) 2016. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later</license>
     <author>Magnus Hasselquist</author>
     <authorEmail>magnus.hasselquist@gmail.com</authorEmail>
     <authorUrl>http://mintekniskasida.blogspot.se/</authorUrl>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>Welcome! Please setup the emails you want to send based on CB lists and select the appropriate DB fileds for TO and CC.
 
 Please note that this component requires Community Builder (CB) version 2 to be installed and configured on your system.</description>
@@ -34,18 +34,14 @@ Please note that this component requires Community Builder (CB) version 2 to be 
         <folder>helpers</folder>
     </files>
     <languages folder="site">
-
-			<language tag="en-GB">language/en-GB.com_hqcblistmailer.ini</language>
+	<language tag="en-GB">language/en-GB.com_hqcblistmailer.ini</language>
     </languages>
     <administration>
         <menu img="components/com_hqcblistmailer/assets/images/s_com_hqcblistmailer.png" >COM_HQCBLISTMAILER</menu>
         <submenu>
-
-			<menu link="option=com_hqcblistmailer&amp;view=emailtemplates" view="emailtemplates" img="components/com_hqcblistmailer/assets/images/s_emailtemplates.png" alt="Hqcblistmailer/Emailtemplates">COM_HQCBLISTMAILER_TITLE_EMAILTEMPLATES</menu>
-
-			<menu link="option=com_hqcblistmailer&amp;view=emailsenders" view="emailsenders" img="components/com_hqcblistmailer/assets/images/s_emailsenders.png" alt="Hqcblistmailer/Emailsenders">COM_HQCBLISTMAILER_TITLE_EMAILSENDERS</menu>
-
-        </submenu>
+		<menu link="option=com_hqcblistmailer&amp;view=emailtemplates" view="emailtemplates" img="components/com_hqcblistmailer/assets/images/s_emailtemplates.png" alt="Hqcblistmailer/Emailtemplates">COM_HQCBLISTMAILER_TITLE_EMAILTEMPLATES</menu>
+		<menu link="option=com_hqcblistmailer&amp;view=emailsenders" view="emailsenders" img="components/com_hqcblistmailer/assets/images/s_emailsenders.png" alt="Hqcblistmailer/Emailsenders">COM_HQCBLISTMAILER_TITLE_EMAILSENDERS</menu>
+	</submenu>
         <files folder="administrator">
             <filename>access.xml</filename>
             <filename>config.xml</filename>
@@ -61,9 +57,8 @@ Please note that this component requires Community Builder (CB) version 2 to be 
             <folder>views</folder>
         </files>
         <languages folder="administrator">
-
-			<language tag="en-GB">language/en-GB.com_hqcblistmailer.ini</language>
-			<language tag="en-GB">language/en-GB.com_hqcblistmailer.sys.ini</language>
+		<language tag="en-GB">language/en-GB.com_hqcblistmailer.ini</language>
+		<language tag="en-GB">language/en-GB.com_hqcblistmailer.sys.ini</language>
         </languages>
     </administration>
 </extension>
