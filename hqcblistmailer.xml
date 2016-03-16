@@ -17,11 +17,6 @@ Please note that this component requires Community Builder (CB) version 2 to be 
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
         </sql>
     </install>
-    <uninstall> <!-- Runs on uninstall -->
-        <sql>
-            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
-        </sql>
-    </uninstall>
 
     <administration>
         <menu img="components/com_hqcblistmailer/assets/images/s_com_hqcblistmailer.png" >COM_HQCBLISTMAILER</menu>
