@@ -1,2 +1,2 @@
 # hqcblistmailer
-HQ CB List Mailer
+HQ CB List Mailer for Community Builder
