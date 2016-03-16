@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
-    <name>com_hqcblistmailer</name>
-    <creationDate>2016-03-15</creationDate>
+    <name>HQ CB List Mailer for Community Builder</name>
+    <creationDate>2016-03-16</creationDate>
     <copyright>Copyright (C) 2016. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Magnus Hasselquist</author>
     <authorEmail>magnus.hasselquist@gmail.com</authorEmail>
     <authorUrl>http://mintekniskasida.blogspot.se/</authorUrl>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <description>Welcome! Please setup the emails you want to send based on CB lists and select the appropriate DB fileds for TO and CC.
 
 Please note that this component requires Community Builder (CB) version 2 to be installed and configured on your system.</description>
@@ -23,19 +23,6 @@ Please note that this component requires Community Builder (CB) version 2 to be 
         </sql>
     </uninstall>
 
-    <files folder="site">
-        <filename>index.html</filename>
-        <filename>hqcblistmailer.php</filename>
-        <filename>controller.php</filename>
-        <filename>router.php</filename>
-        <folder>views</folder>
-        <folder>models</folder>
-        <folder>controllers</folder>
-        <folder>helpers</folder>
-    </files>
-    <languages folder="site">
-	<language tag="en-GB">language/en-GB.com_hqcblistmailer.ini</language>
-    </languages>
     <administration>
         <menu img="components/com_hqcblistmailer/assets/images/s_com_hqcblistmailer.png" >COM_HQCBLISTMAILER</menu>
         <submenu>
