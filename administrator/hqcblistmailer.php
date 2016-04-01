@@ -13,7 +13,8 @@ defined('_JEXEC') or die;
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_hqcblistmailer')) 
 {
-	throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+	$error = (JText::_('JERROR_ALERTNOAUTHOR'));
+	JFactory::getApplication()->enqueueMessage($error, 'error');
 }
 
 // Include dependancies
