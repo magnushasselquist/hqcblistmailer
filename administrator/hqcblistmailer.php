@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_hqcblistmailer')) 
 {
-	$error = (JText::_('JERROR_ALERTNOAUTHOR'));
+	$error = "Not have to be an Author or higher";
 	JFactory::getApplication()->enqueueMessage($error, 'error');
 }
 
