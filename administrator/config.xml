@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="component"
-		label="COM_HQCBLISTMAILER_COMPONENT_LABEL"
-		description="COM_HQCBLISTMAILER_COMPONENT_DESC"
-	>
+    <fieldset label="COM_HQCBLISTMAILER" name="hqcblistmailer">
+        
+    </fieldset>
 
-        <field name="test"
-             type="radio"
-             default="1"
-             label="COM_HQCBLISTMAILER_TEST_LABEL"
-             description="COM_HQCBLISTMAILER_TEST_DESC">
-                 <option value="0">JHIDE</option>
-                 <option value="1">JSHOW</option>
-         </field>
+    <fieldset name="permissions"
+              description="JCONFIG_PERMISSIONS_DESC"
+              label="JCONFIG_PERMISSIONS_LABEL">
 
+        <field name="rules" type="rules" component="com_hqcblistmailer"
+               class="inputbox" filter="rules" validate="rules"
+               label="JCONFIG_PERMISSIONS_LABEL"
+               section="component"
+        />
 	</fieldset>
 
-	<fieldset name="permissions"
-		description="JCONFIG_PERMISSIONS_DESC"
-		label="JCONFIG_PERMISSIONS_LABEL"
-	>
+    <fieldset name="component">
+        <field name="save_history"
+               type="radio"
+               class="btn-group btn-group-yesno"
+               default="0"
+               label="JGLOBAL_SAVE_HISTORY_OPTIONS_LABEL"
+               description="JGLOBAL_SAVE_HISTORY_OPTIONS_DESC"
+        >
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
 
-		<field 
-            name="rules" 
-            type="rules"
-			component="com_hqcblistmailer"
-            class="inputbox"
-			filter="rules"
-			validate="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"
-			section="component" />
-	</fieldset>
-
+        <field name="history_limit"
+               type="text"
+               filter="integer"
+               label="JGLOBAL_HISTORY_LIMIT_OPTIONS_LABEL"
+               description="JGLOBAL_HISTORY_LIMIT_OPTIONS_DESC"
+               default="5"
+        />
+    </fieldset>
 </config>
 <!--
 ########################################################################################
@@ -106,4 +109,4 @@ http://docs.joomla.org/Usergroup_parameter_type
 <field name="myusergroups" type="usergroup" default="" label="Select a user group" description="" />
 
 
- -->
+-->

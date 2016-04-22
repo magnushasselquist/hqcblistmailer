@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     1.0.0
- * @package     com_hqcblistmailer
- * @copyright   Copyright (C) 2014. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Magnus Hasselquist <magnus.hasselquist@gmail.com> - http://mintekniskasida.blogspot.se/
+ * @version    CVS: 1.0.0
+ * @package    Com_Hqcblistmailer
+ * @author     Magnus Hasselquist <magnus.hasselquist@gmail.com>
+ * @copyright  Copyright (C) 2014. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access.
@@ -12,22 +12,66 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controlleradmin');
 
+use Joomla\Utilities\ArrayHelper;
+
 /**
  * Emailsenders list controller class.
+ *
+ * @since  1.6
  */
 class HqcblistmailerControllerEmailsenders extends JControllerAdmin
 {
 	/**
-	 * Proxy for getModel.
-	 * @since	1.6
+	 * Method to clone existing Emailsenders
+	 *
+	 * @return void
 	 */
-	public function getModel($name = 'emailsender', $prefix = 'HqcblistmailerModel')
+	public function duplicate()
+	{
+		// Check for request forgeries
+		Jsession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get id(s)
+		$pks = $this->input->post->get('cid', array(), 'array');
+
+		try
+		{
+			if (empty($pks))
+			{
+				throw new Exception(JText::_('COM_HQCBLISTMAILER_NO_ELEMENT_SELECTED'));
+			}
+
+			ArrayHelper::toInteger($pks);
+			$model = $this->getModel();
+			$model->duplicate($pks);
+			$this->setMessage(Jtext::_('COM_HQCBLISTMAILER_ITEMS_SUCCESS_DUPLICATED'));
+		}
+		catch (Exception $e)
+		{
+			JFactory::getApplication()->enqueueMessage($e->getMessage(), 'warning');
+		}
+
+		$this->setRedirect('index.php?option=com_hqcblistmailer&view=emailsenders');
+	}
+
+	/**
+	 * Proxy for getModel.
+	 *
+	 * @param   string  $name    Optional. Model name
+	 * @param   string  $prefix  Optional. Class prefix
+	 * @param   array   $config  Optional. Configuration array for model
+	 *
+	 * @return  object	The Model
+	 *
+	 * @since    1.6
+	 */
+	public function getModel($name = 'emailsender', $prefix = 'HqcblistmailerModel', $config = array())
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
+
 		return $model;
 	}
-    
-    
+
 	/**
 	 * Method to save the submitted ordering values for records via AJAX.
 	 *
@@ -39,12 +83,12 @@ class HqcblistmailerControllerEmailsenders extends JControllerAdmin
 	{
 		// Get the input
 		$input = JFactory::getApplication()->input;
-		$pks = $input->post->get('cid', array(), 'array');
+		$pks   = $input->post->get('cid', array(), 'array');
 		$order = $input->post->get('order', array(), 'array');
 
 		// Sanitize the input
-		JArrayHelper::toInteger($pks);
-		JArrayHelper::toInteger($order);
+		ArrayHelper::toInteger($pks);
+		ArrayHelper::toInteger($order);
 
 		// Get the model
 		$model = $this->getModel();
@@ -60,7 +104,4 @@ class HqcblistmailerControllerEmailsenders extends JControllerAdmin
 		// Close the application
 		JFactory::getApplication()->close();
 	}
-    
-    
-    
 }

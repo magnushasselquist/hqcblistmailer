@@ -9,7 +9,6 @@
 
 defined('JPATH_BASE') or die;
 
-jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
 /**
@@ -17,7 +16,7 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldCustomField extends JFormField
+class JFormFieldModifiedby extends JFormField
 {
 	/**
 	 * The form field type.
@@ -25,7 +24,7 @@ class JFormFieldCustomField extends JFormField
 	 * @var        string
 	 * @since    1.6
 	 */
-	protected $type = 'text';
+	protected $type = 'modifiedby';
 
 	/**
 	 * Method to get the field input markup.
@@ -37,7 +36,10 @@ class JFormFieldCustomField extends JFormField
 	protected function getInput()
 	{
 		// Initialize variables.
-		$html = array();
+		$html   = array();
+		$user   = JFactory::getUser();
+		$html[] = '<input type="hidden" name="' . $this->name . '" value="' . $user->id . '" />';
+		$html[] = "<div>" . $user->name . " (" . $user->username . ")</div>";
 
 		return implode($html);
 	}
