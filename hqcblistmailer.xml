@@ -81,6 +81,6 @@ Please note that this component requires Community Builder (CB) version 2 to be 
         <plugin group="search" plugin="hqcblistmailer"/>
     </plugins>    
     <updateservers>
-      <server type="extension" priority="2" name="HQ CB List Mailer"> https://raw.githubusercontent.com/magnushasselquist/hqcblistmailer/master/updates.xml</server>
+      <server type="extension" priority="2" name="HQ CB List Mailer for Community Builder"> https://raw.githubusercontent.com/magnushasselquist/hqcblistmailer/master/updates.xml</server>
     </updateservers>
 </extension>
