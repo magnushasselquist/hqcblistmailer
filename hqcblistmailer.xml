@@ -43,4 +43,7 @@ Please note that this component requires Community Builder (CB) version 2 to be 
 		<language tag="en-GB">language/en-GB.com_hqcblistmailer.sys.ini</language>
         </languages>
     </administration>
+    <updateservers>
+      <server type="extension" priority="2" name="HQ CB List Mailer"> https://raw.githubusercontent.com/magnushasselquist/hqcblistmailer/master/updates.xml</server>
+    </updateservers>
 </extension>
