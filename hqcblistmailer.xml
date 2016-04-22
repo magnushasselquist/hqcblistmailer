@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
-    <name>HQ CB List Mailer for Community Builder</name>
+    <name>com_hqcblistmailer</name>
     <creationDate>2016-04-22</creationDate>
     <copyright>Copyright (C) 2016. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
