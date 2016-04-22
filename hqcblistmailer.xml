@@ -17,6 +17,31 @@ Please note that this component requires Community Builder (CB) version 2 to be 
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
         </sql>
     </install>
+    <update> <!-- Runs on update -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/update.mysql.utf8.sql</file>
+        </sql>
+    </update>
+
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>hqcblistmailer.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <folder>views</folder>
+        <folder>models</folder>
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+    </files>
+    <media destination="com_hqcblistmailer" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+    </media>
+    <languages folder="languages/site">
+        
+			<language tag="en-GB">en-GB/en-GB.com_hqcblistmailer.ini</language>
+			<language tag="sv-SE">sv-SE/sv-SE.com_hqcblistmailer.ini</language>
+    </languages>
 
     <administration>
         <menu img="components/com_hqcblistmailer/assets/images/s_com_hqcblistmailer.png" >COM_HQCBLISTMAILER</menu>
@@ -38,11 +63,23 @@ Please note that this component requires Community Builder (CB) version 2 to be 
             <folder>tables</folder>
             <folder>views</folder>
         </files>
-        <languages folder="administrator">
-		<language tag="en-GB">language/en-GB.com_hqcblistmailer.ini</language>
-		<language tag="en-GB">language/en-GB.com_hqcblistmailer.sys.ini</language>
+        <languages folder="languages/administrator">
+			<language tag="en-GB">en-GB/en-GB.com_hqcblistmailer.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_hqcblistmailer.sys.ini</language>
+			<language tag="sv-SE">sv-SE/sv-SE.com_hqcblistmailer.ini</language>
+			<language tag="sv-SE">sv-SE/sv-SE.com_hqcblistmailer.sys.ini</language>
         </languages>
     </administration>
+    <config>
+        <fields name="params">
+            <fieldset name="component">
+                <field name="save_history" default="0" />
+            </fieldset>
+        </fields>
+    </config>
+    <plugins>
+        <plugin group="search" plugin="hqcblistmailer"/>
+    </plugins>    
     <updateservers>
       <server type="extension" priority="2" name="HQ CB List Mailer"> https://raw.githubusercontent.com/magnushasselquist/hqcblistmailer/master/updates.xml</server>
     </updateservers>
