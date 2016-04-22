@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.6
  * @package    Com_Hqcblistmailer
  * @author     Magnus Hasselquist <magnus.hasselquist@gmail.com>
- * @copyright  Copyright (C) 2014. All rights reserved.
+ * @copyright  Copyright (C) 2016. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 // No direct access
