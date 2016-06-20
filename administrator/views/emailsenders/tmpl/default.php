@@ -92,13 +92,13 @@ if ($template_id <>"") {
        			$select_sql = $filter_advanced;
     		}
 
-		$userlistorder = $json_a['basic_sort'][0]['column'] . " " . $json_a['basic_sort'][0]['direction'];
+		$userlistorder = $json_a['sort_basic'][0]['column'] . " " . $json_a['sort_basic'][0]['direction'];
 		//echo "<br/><br/>ORDER: " . $userlistorder .".";
 		//echo "<br/><br/>DEC :".$select_sql .":";
 
 
 		// satt bas-sql for att koppla samman anvandare falt och listor
-		$fetch_sql = "select * from j25_users inner join j25_comprofiler on j25_users.id = j25_comprofiler.user_id where j25_users.block = 0 ";
+		$fetch_sql = "select * from #__users inner join j25_comprofiler on j25_users.id = #__comprofiler.user_id where #__users.block = 0 ";
 		// lagg till having endast om det finns ett filter for att hantera standardlistan som inte har ngt filter
 		if ($select_sql <>'') $fetch_sql = $fetch_sql . "having " . $select_sql;
 		// skriv ut kompilerad sql for debug
