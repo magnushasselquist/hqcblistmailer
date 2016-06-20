@@ -80,6 +80,8 @@ if ($template_id <>"") {
 		$select_sql = $db->loadResult();
 
 		$json_a=json_decode($select_sql,true);
+		$select_sql = ""; //reset before re-creating it
+		
     		$filters_basic = $json_a['filter_basic'];
     		$filter_advanced = $json_a['filter_advanced'];
     		if ($filters_basic <>'') {
