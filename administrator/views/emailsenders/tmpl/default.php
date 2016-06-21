@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 function db_field_replace($before_str, $user_id) {
 	$db =& JFactory::getDBO();
 	// $query = "SELECT * FROM #__comprofiler WHERE id =".$user_id;
-	$query = "SELECT * FROM #__users INNER JOIN #__comprofiler ON j25_users.id = j25_comprofiler.user_id WHERE j25_users.id =".$user_id;
+	$query = "SELECT * FROM #__users INNER JOIN #__comprofiler ON #__users.id = #__comprofiler.user_id WHERE #__users.id =".$user_id;
 	// echo $query;
 	$db->setQuery($query);
 	$person = $db->loadAssoc();
@@ -100,7 +100,7 @@ if ($template_id <>"") {
 
 
 		// satt bas-sql for att koppla samman anvandare falt och listor
-		$fetch_sql = "select * from #__users inner join j25_comprofiler on j25_users.id = #__comprofiler.user_id where #__users.block = 0 ";
+		$fetch_sql = "select * from #__users inner join #__comprofiler on #__users.id = #__comprofiler.user_id where #__users.block = 0 ";
 		// lagg till having endast om det finns ett filter for att hantera standardlistan som inte har ngt filter
 		if ($select_sql <>'') $fetch_sql = $fetch_sql . "having " . $select_sql;
 		// skriv ut kompilerad sql for debug
