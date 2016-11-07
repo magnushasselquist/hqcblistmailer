@@ -31,8 +31,6 @@ function db_field_replace($before_str, $user_id) {
 	return $after_str;
 }
 
-require '../libraries/vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
-
 $db =& JFactory::getDBO();
 $user = JFactory::getUser();
 $template_id = $_GET["template_id"];
@@ -122,52 +120,58 @@ if ($template_id <>"") {
 
 
 			if ($action == "send_own") { //send a test email to the user henself
-				$mail = new PHPMailer;
-				$mail->CharSet = 'UTF-8';
-				$mail->From = $email_sender;
-				$mail->FromName = $email_sendername;
-				$mail->isHTML(true);
+				$mailer = JFactory::getMailer();
+				$mailer->isHTML(true);
+				$mailer->Encoding = 'base64';
 
-				$mail->Subject = db_field_replace($email_subject, $user->id);
-				$mail->Body = db_field_replace($email_body, $user->id);
+				$sender = array($email_sender, $email_sendername);
+				$mailer->setSender($sender);
 
-				$mail->addAddress($user->email);
+				$mailer->setSubject(db_field_replace($email_subject, $user->id));
+				$mailer->setBody(db_field_replace($email_body, $user->id));
 
-				if ($mail->send()) {
-				 echo('OK till dig själv');
-				 } else {
-				 echo('ERROR: '. $mail->ErrorInfo);
-				 }
+				$mailer->addRecipient($user->email); //TODO: Include real name of the person
+
+				$send = $mailer->Send();
+				if ( $send !== true ) {
+				    echo 'Error sending email: ' . $send->__toString();
+				} else {
+				    echo 'Mail sent';
+				}
 			}
 			if ($action == "send") { //ok, send all emails
 
 				foreach ($persons as $person) { //for every person that is a reciever, lets do an email.
-				 	$mail = new PHPMailer;
-				 	$mail->CharSet = 'UTF-8';
-					$mail->From = $email_sender;
-					$mail->FromName = $email_sendername;
-					$mail->isHTML(true);
+					$mailer = JFactory::getMailer();
+					$mailer->isHTML(true);
+					$mailer->Encoding = 'base64';
 
-				 	$mail->addAddress ($person[$email_to_field], $person[$email_to_name_field]);
+					$sender = array($email_sender, $email_sendername);
+					$mailer->setSender($sender);
+
+//				 	$mailer->addRecipient($person[$email_to_field], $person[$email_to_name_field]);
+				 	$mailer->addRecipient($person[$email_to_field]);
+					// TODO: have name for recipients
 
 					if (! empty($person[$email_cc1])) {
-						$mail->addCC($person[$email_cc1]);
+						$mailer->addCC($person[$email_cc1]);
 					}
 					if (! empty($person[$email_cc2])) {
-						$mail->addCC($person[$email_cc2]);
+						$mailer->addCC($person[$email_cc2]);
 					}
 					if (! empty($person[$email_cc3])) {
-						$mail->addCC($person[$email_cc3]);
+						$mailer->addCC($person[$email_cc3]);
 					}
 
-				    $mail->Subject = db_field_replace($email_subject, $person['id']);
-					$mail->Body = db_field_replace($email_body, $person['id']);
+				        $mailer->setSubject(db_field_replace($email_subject, $person['id']));
+					$mailer->setBody(db_field_replace($email_body, $person['id']));
 
-					if ($mail->send()) {
-					 echo('OK<br/>');
-					 } else {
-				 	 echo('ERROR: '. $mail->ErrorInfo);
-					 }
+					$send = $mailer->Send();
+					if ( $send !== true ) {
+					    echo 'Error sending email: ' . $send->__toString();
+					} else {
+					    echo 'Mail sent';
+					}
 				}
 			}
 		}
