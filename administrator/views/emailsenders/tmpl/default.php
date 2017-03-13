@@ -69,15 +69,15 @@ if ($template_id <>"") {
 		$email_cb_list_id = $template['emailcblist'];
 
 
-		$query = "select params from #__comprofiler_lists WHERE listid = ".$email_cb_list_id;
+		$query = "select params, usergroupids from #__comprofiler_lists WHERE listid = ".$email_cb_list_id;
 		// echo $query;
 		$db->setQuery($query);
 		// rensa upp urlencodningen och trimma bort a och paranteser
 		//$select_sql = '';
 		//$select_sql = substr(urldecode($db->loadResult()), 2, -1);
-		$select_sql = $db->loadResult();
-
-		$json_a=json_decode($select_sql,true);
+		$row = $db->loadAssoc();
+		$select_sql_raw = $row['params'];
+		$json_a=json_decode($select_sql_raw, true);
 		$select_sql = ""; //reset before re-creating it
 		
     		$filters_basic = $json_a['filter_basic'];
@@ -98,9 +98,22 @@ if ($template_id <>"") {
 
 
 		// satt bas-sql for att koppla samman anvandare falt och listor
-		$fetch_sql = "select * from #__users inner join #__comprofiler on #__users.id = #__comprofiler.user_id where #__users.block = 0 ";
+// OLD		$fetch_sql = "select * from #__users u inner join #__comprofiler ue on u.id = ue.user_id where u.block = 0 ";
+        	$usergroupids = str_replace("|*|", ",", $row['usergroupids']); //CMJ ADDED
+
+       		$list_show_unapproved = $json_a['list_show_unapproved'];
+        	$list_show_blocked = $json_a['list_show_blocked'];
+        	$list_show_unconfirmed = $json_a['list_show_unconfirmed'];
+        	$fetch_sql = "SELECT u.*, ue.* FROM #__users u JOIN #__user_usergroup_map g ON g.`user_id` = u.`id` JOIN #__comprofiler ue ON ue.`id` = u.`id` WHERE g.group_id IN (".$usergroupids.")";
+        	if ($list_show_blocked == 0) {$fetch_sql.=" AND u.block = 0 ";}
+        	if ($list_show_unapproved == 0) {$fetch_sql.=" AND ue.approved = 1 ";} 
+        	if ($list_show_unconfirmed == 0) {$fetch_sql.=" AND ue.confirmed = 1 ";}
+
+
 		// lagg till having endast om det finns ett filter for att hantera standardlistan som inte har ngt filter
-		if ($select_sql <>'') $fetch_sql = $fetch_sql . "having " . $select_sql;
+// OLD		if ($select_sql <>'') $fetch_sql = $fetch_sql . "having " . $select_sql;
+        	if ($select_sql <>'') $fetch_sql = $fetch_sql . " AND (" . $select_sql . ")";
+
 		// skriv ut kompilerad sql for debug
 		// echo $fetch_sql . "<br>";
 		// echo "Email recievers sql: ".$email_recievers_sql; //debug only
@@ -114,7 +127,7 @@ if ($template_id <>"") {
 		if (!empty($persons)){
 			echo "<b>Recievers: </b>".count($persons)."<br/>";
 
-			echo "<h2>3. Skicka</h2>";
+			echo "<h2>3. Send</h2>";
 			echo "<a href='index.php?option=com_hqcblistmailer&view=emailsenders&template_id=".$email_id."&action=send_own'>Send test email to yourself</a><br/><br/>";
 			echo "<a href='index.php?option=com_hqcblistmailer&view=emailsenders&template_id=".$email_id."&action=send'>Send email to all reciepents</a><br/>";
 
