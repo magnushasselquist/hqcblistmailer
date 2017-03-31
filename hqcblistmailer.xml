@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
     <name>com_hqcblistmailer</name>
-    <creationDate>2016-06-21</creationDate>
+    <creationDate>2017-03-31</creationDate>
     <copyright>Copyright (C) 2016. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Magnus Hasselquist</author>
     <authorEmail>magnus.hasselquist@gmail.com</authorEmail>
     <authorUrl>https://github.com/magnushasselquist</authorUrl>
-    <version>1.0.8</version>
+    <version>1.1.1</version>
     <description>Welcome! Please setup the emails you want to send based on CB lists and select the appropriate DB fileds for TO and CC.
 
 Please note that this component requires Community Builder (CB) version 2 to be installed and configured on your system.</description>
