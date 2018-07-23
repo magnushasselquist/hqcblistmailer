@@ -82,13 +82,13 @@ if ($template_id <>"") {
 		
     		$filters_basic = $json_a['filter_basic'];
     		$filter_advanced = $json_a['filter_advanced'];
-    		if ($filters_basic <>'') {
+    		if ($json_a['filter_mode'] == 0) {
        		      foreach($filters_basic as $filter) {
               		       $select_sql .= $filter['column'] . " " . $filter['operator']. " '" . $filter['value'] ."' AND ";
             		 }
            		  $select_sql = substr($select_sql, 0, -5); //rensa bort den sista AND
      		}
-    		  if ($filter_advanced <> '') {
+    		else if ($json_a['filter_mode'] == 1) {
        			$select_sql = $filter_advanced;
     		}
 
